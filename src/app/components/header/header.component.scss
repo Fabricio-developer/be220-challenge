@@ -1,0 +1,38 @@
+ion-header {
+  ion-toolbar {
+    min-height: 5rem;
+    height: auto;
+    max-height: 15rem;
+    padding: 0.5rem;
+    border-radius: 0 0 1rem 1rem;
+
+    ion-title {
+      min-height: 2rem;
+      display: flex;
+      justify-content: center;
+      app-logo {
+        object-fit: contain;
+      }
+    }
+
+    .badges {
+      ion-col {
+        ion-chip {
+          gap: 2;
+          div {
+            display: flex;
+            flex-direction: row;
+          }
+        }
+      }
+
+      .label-name {
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+      .label-level {
+        font-weight: 200;
+      }
+    }
+  }
+}
