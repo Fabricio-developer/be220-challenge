@@ -1,0 +1,7 @@
+{
+  "name": "Usina do corpo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
