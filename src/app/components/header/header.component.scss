@@ -10,6 +10,7 @@ ion-header {
       ion-buttons {
         ion-menu-button {
           --background: transparent;
+          --color: var(--ion-color-primary-contrast);
         }
       }
 
