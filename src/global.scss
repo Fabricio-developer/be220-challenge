@@ -36,3 +36,17 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-content {
+  --offset-bottom: auto !important;
+  --overflow: auto;
+  overflow: auto;
+
+  &::part(background) {
+    bottom: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+  }
+}
