@@ -8,6 +8,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { HeaderComponent } from '../components/header/header.component';
+import { CarouselComponent } from "../components/carousel/carousel.component";
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from '../components/header/header.component';
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    CarouselComponent
 ],
   declarations: [FolderPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
