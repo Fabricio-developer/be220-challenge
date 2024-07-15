@@ -9,7 +9,8 @@ export interface CarouselComponentCard {
 
 export interface CarouselProps {
   title: string;
-  badgeType: 'icon' | 'text';
-  badge?: string;
+  type: 'icon' | 'badge';
+  badgeText?: string;
+  icon?: string;
   function?: Function;
 }
