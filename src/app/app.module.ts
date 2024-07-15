@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { register } from 'swiper/element/bundle';
+import { UtilsTsService } from './services/utils.ts.service';
 
 
 register();
