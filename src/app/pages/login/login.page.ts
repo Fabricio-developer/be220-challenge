@@ -1,36 +1,47 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ɵFormControlCtor } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonRow, IonCol } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
-import { types } from './interface';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { LogoComponent } from "../../../assets/logo/logo.component";
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  IonContent,
+  IonCard,
+  IonItem,
+  IonInput,
+  IonText,
+  IonButton,
+  IonIcon, IonLabel, IonRow, IonCol, IonGrid, IonTitle, IonInputPasswordToggle } from '@ionic/angular/standalone';
+import { LogoComponent } from "../../../../android/app/build/intermediates/assets/debug/public/assets/logo/logo.component";
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  templateUrl: 'login.page.html',
+  styleUrls: ['login.page.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonItem, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LogoComponent, ReactiveFormsModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [IonTitle, IonLabel,
+    IonIcon,
+    IonButton,
+    IonText,
+    IonInput,
+    IonItem,
+    IonCard,
+    IonContent,
+    ReactiveFormsModule,
+    IonRow,
+    IonCol,
+    IonGrid,IonInputPasswordToggle, LogoComponent],
 })
-export class LoginPage implements OnInit {
+export class loginPage {
   form!: FormGroup;
+  isPwd = false;
 
-  constructor(private router: Router, public auth: AuthService) {
-    addIcons({ logoGoogle });
+  constructor() {
     this.initForm();
-  }
-
-  email: string = '';
-  password: string = '';
-
-
-  ngOnInit() {
-
+    addIcons({logoGoogle})
   }
 
   initForm() {
@@ -43,24 +54,15 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async login(option: types = 'email') {
-
-    switch (option) {
-      case 'google':
-        console.log("🚀 ~ LoginPage ~ loginHandler ~ google:")
-        // await this.auth.googleSignin()
-
-        console.log("🚀 ~ LoginPage ~ loginHandler ~ this.router.url:", this.router.url)
-        this.router.navigate(['/', 'home']);
-
-        break;
-
-      default:
-        if(this.form.invalid) return;
-        const credential = await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value)
-        console.log("🚀 ~ LoginPage ~ login ~ credential:", credential)
-        break;
-    }
+  togglePwd() {
+    this.isPwd = !this.isPwd;
   }
 
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    console.log(this.form.value);
+  }
 }

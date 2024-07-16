@@ -60,10 +60,11 @@ ion-content {
 }
 
 .button, ion-button {
+  width: 100%;
+  height: auto;
   --background: var(--ion-color-primary-contrast);
   --background-focused:  var(--ion-color-primary);
   --color-focused:  var(--ion-color-primary-contrast);
   --color: var(--ion-color-primary);
-  height: auto;
 }
 
