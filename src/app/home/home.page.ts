@@ -11,7 +11,6 @@ import { LogoComponent } from "../../assets/logo/logo.component";
 import { AuthService } from '../services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 import { ProgramsService } from '../services/programs/programs.service';
-import { FirestoreModule } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +41,7 @@ export class HomePage {
   }
   private activatedRoute = inject(ActivatedRoute);
 
-  constructor(private route: ActivatedRoute, private router: Router, public authService: AuthService, private toastController: ToastController) {
+  constructor(private route: ActivatedRoute, private router: Router, public authService: AuthService, private toastController: ToastController, private programService: ProgramsService) {
     this.checkAppMode();
 
     addIcons({ personCircle, notifications, accessibility, trophy });
@@ -50,11 +49,6 @@ export class HomePage {
   }
 
   ngOnInit() {
-
-
-    // this.programService.getPrograms('').subscribe((item) => {
-    //   console.log("🚀 ~ HomePage ~ this.programService.getPrograms ~ item:", item)
-    // })
 
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.cardsPersonal = [

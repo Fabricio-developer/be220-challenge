@@ -32,6 +32,7 @@ export class AuthService {
     try {
       const credential = await this.auth.signInWithEmailAndPassword(emali, password);
       this.user = credential.user;
+      return this.user;
     } catch (error) {
       this.error = error;
 

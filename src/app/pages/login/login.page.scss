@@ -4,48 +4,60 @@ ion-container {
   position: relative;
   display: flex;
   justify-content: center;
-    gap: 2rem;
-  
-    ion-row {
-      height: 2rem;
-      margin-top: 1rem;
-      ion-title {
-        text-align: center;    
-      }
+  gap: 2rem;
 
-      ion-col {
-        .divider {
-          margin-top: 2rem;
-        }
-        
-      }
-      .social-btn {
-        display: flex;
-        justify-content: center;
+  ion-row {
+    height: 5rem;
+    margin-top: 2rem;
 
-        ion-button {
-          --background: var(--ion-color-primary-contrast);
-          --background-focused:  var(--ion-color-primary);
-          --color-focused:  var(--ion-color-primary-contrast);
-          --color: var(--ion-color-primary);
-          border: 1px solid var(--ion-color-medium);
-          border-radius:0.5rem;
-        }
+    ion-col {
+      ion-title{
+        text-align: center;
       }
     }
-}
+  }
 
-.form {
-  width: 90%;
-  height: 70%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: var(--ion-color-primary-contrast);
-  color: var(--ion-color-primary);
-  padding: 30px;
-  border-radius: 1rem 1rem 0 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  form {
+    width: 90%;
+    height: 70%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--ion-color-primary-contrast);
+    color: var(--ion-color-primary);
+    padding: 30px;
+    border-radius: 1rem 1rem 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+    ion-grid {
+      ion-row {
+        height: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        ion-title {
+          text-align: center;
+        }
+
+        ion-col {
+          .divider {
+            margin-top: 2rem;
+          }
+        }
+        .social-btn {
+          display: flex;
+          justify-content: center;
+        }
+
+        .button-col {
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+    }
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ɵFormControlCtor } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonRow, IonCol } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { types } from './interface';
@@ -14,13 +14,15 @@ import { logoGoogle } from 'ionicons/icons';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonItem, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LogoComponent],
+  imports: [IonCol, IonRow, IonItem, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LogoComponent, ReactiveFormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginPage implements OnInit {
+  form!: FormGroup;
 
   constructor(private router: Router, public auth: AuthService) {
     addIcons({ logoGoogle });
+    this.initForm();
   }
 
   email: string = '';
@@ -28,6 +30,17 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
+
+  }
+
+  initForm() {
+    this.form = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
   }
 
   async login(option: types = 'email') {
@@ -43,6 +56,9 @@ export class LoginPage implements OnInit {
         break;
 
       default:
+        if(this.form.invalid) return;
+        const credential = await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value)
+        console.log("🚀 ~ LoginPage ~ login ~ credential:", credential)
         break;
     }
   }
