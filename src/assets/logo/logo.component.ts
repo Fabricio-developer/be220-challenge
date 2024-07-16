@@ -6,12 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./logo.component.scss'],
   standalone: true
 })
-export class LogoComponent  implements OnInit {
+export class LogoComponent implements OnInit {
   @Input() fillColor: string = "#F5A132";
   @Input() proportion: string = "100";
 
   constructor() { }
 
-  ngOnInit() {}
-
+  ngOnInit() { }
 }

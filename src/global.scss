@@ -34,7 +34,8 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+@import '@ionic/angular/css/palettes/dark.system.css';
+@import '@ionic/angular/css/palettes/dark.always.css';
 
 ion-content {
   --offset-bottom: auto !important;
@@ -49,4 +50,11 @@ ion-content {
     display: none;
     scrollbar-width: none;
   }
+}
+
+
+.divider{
+  width: 100%;
+  margin: 0 0.5rem;
+  border-bottom: 1px solid var(--ion-color-primary);
 }

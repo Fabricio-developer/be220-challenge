@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
 import { CarouselComponent } from './carousel.component';
 
@@ -9,8 +8,7 @@ describe('CarouselComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarouselComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [CarouselComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CarouselComponent);
