@@ -8,7 +8,7 @@ import { User } from './interface';
 })
 export class AuthService {
 
-  user: any;
+  private user!: User| null;
   error: any;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser: Observable<User | null> = this.currentUserSubject.asObservable();
@@ -32,9 +32,21 @@ export class AuthService {
     try {
       const credential = await this.auth.signInWithEmailAndPassword(emali, password);
       this.user = credential.user;
+      if (credential.user) {
+        let user = credential.user;
+        this.currentUserSubject.next({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL
+        });
+      } else {
+        this.currentUserSubject.next(null);
+      }
       return this.user;
     } catch (error) {
       this.error = error;
+      return this.error.message;
 
     }
   }

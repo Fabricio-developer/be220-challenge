@@ -9,7 +9,7 @@ import { CarouselComponentCard, CarouselProps } from '../components/carousel/int
 import { CarouselComponent } from "../components/carousel/carousel.component";
 import { LogoComponent } from "../../assets/logo/logo.component";
 import { AuthService } from '../services/auth/auth.service';
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { ProgramsService } from '../services/programs/programs.service';
 
 @Component({
@@ -41,7 +41,7 @@ export class HomePage {
   }
   private activatedRoute = inject(ActivatedRoute);
 
-  constructor(private route: ActivatedRoute, private router: Router, public authService: AuthService, private toastController: ToastController, private programService: ProgramsService) {
+  constructor(private route: ActivatedRoute, private router: Router, public authService: AuthService, private toastController: ToastController, public navController: NavController) {
     this.checkAppMode();
 
     addIcons({ personCircle, notifications, accessibility, trophy });
@@ -50,7 +50,6 @@ export class HomePage {
 
   ngOnInit() {
 
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.cardsPersonal = [
       {
         bgImage: 'https://img.freepik.com/fotos-gratis/dumbbells-no-primeiro-plano-ambiente-de-ginasio-atras_91128-4625.jpg?t=st=1721001572~exp=1721005172~hmac=a8bef969a0c857b0ac8752c5cff14c8642e3fd2a6ee5473edf7218f94b5adbba&w=996',
@@ -107,9 +106,10 @@ export class HomePage {
       position: 'top',
     });
 
+    this.navController.navigateBack('login')
+
 
     await toast.present();
-    this.router.navigate(['/', 'login']);
   }
 
 }

@@ -12,10 +12,15 @@ import {
   IonInput,
   IonText,
   IonButton,
-  IonIcon, IonLabel, IonRow, IonCol, IonGrid, IonTitle, IonInputPasswordToggle } from '@ionic/angular/standalone';
+  IonIcon, IonLabel, IonRow, IonCol, IonGrid, IonTitle, IonInputPasswordToggle
+} from '@ionic/angular/standalone';
 import { LogoComponent } from "../../../../android/app/build/intermediates/assets/debug/public/assets/logo/logo.component";
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
+import { types } from './interface';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -33,15 +38,15 @@ import { logoGoogle } from 'ionicons/icons';
     ReactiveFormsModule,
     IonRow,
     IonCol,
-    IonGrid,IonInputPasswordToggle, LogoComponent],
+    IonGrid, IonInputPasswordToggle, LogoComponent],
 })
 export class loginPage {
   form!: FormGroup;
   isPwd = false;
 
-  constructor() {
+  constructor(private router: Router, public auth: AuthService, private toastController: ToastController) {
     this.initForm();
-    addIcons({logoGoogle})
+    addIcons({ logoGoogle })
   }
 
   initForm() {
@@ -58,11 +63,46 @@ export class loginPage {
     this.isPwd = !this.isPwd;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
+    await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value).catch(async (error) => {
+      console.log("🚀 ~ loginPage ~ onSubmit ~ error:", error)
+      const toast = await this.toastController.create({
+        message: 'Verfique o login e tente novamente',
+        duration: 1000,
+        position: 'top',
+      });
+      await toast.present();
+    }).then(async (credential) => {
+
+      const toast = await this.toastController.create({
+        message: 'Logado com sucesso!',
+        duration: 1000,
+        position: 'top',
+      });
+
+      localStorage.setItem('user', JSON.stringify(credential))
+      await toast.present();
+      this.router.navigate(['/', 'home']);
+    })
+
+  }
+
+  async login(option: types = 'email') {
+
+    switch (option) {
+      case 'google':
+        await this.auth.googleSignin()
+
+        this.router.navigate(['/', 'home']);
+
+        break;
+
+      default:
+        break;
+    }
   }
 }
