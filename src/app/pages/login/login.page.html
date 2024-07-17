@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true">
+  <ion-row class="header"  class="ion-justify-content-center">
+    <ion-col size="2">
+      <app-logo [proportion]="'50'" />
+    </ion-col>
+    <ion-col size="12">
+      <ion-title class="ion-text-center" >
+        Rede Usina academia
+      </ion-title>
+    </ion-col>
+  </ion-row>
+
+  <form class="form" [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="input-col" size="12">
+          <ion-input  fill="outline" type="email" formControlName="email"
+            placeholder="email@provedor.com" errorText="* Informe um email válido">
+            <div slot="label">Email <ion-text color="danger"></ion-text></div>
+          </ion-input>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="input-col" size="12">
+          <ion-input  label="Senha"  [type]="isPwd ? 'text' : 'password'" placeholder="Senha"
+            formControlName="password" fill="outline"
+            [errorText]="form.get('password')!.hasError('minlength') ? '* A senha deve ser maior que 8 caractéres' : '* Informe sua senha'">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="button-col" size="12">
+          <ion-button class="button" color="primary" mode="ios" expand="block" (click)="onSubmit()">
+            Entrar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col>
+          <div class="divider"></div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6">
+          <ion-label>Ou entre com</ion-label>
+          <ion-col class="button-col" size="12">
+            <ion-button mode="ios">
+              <ion-icon size="large" name="logo-google"></ion-icon>
+              Google
+            </ion-button>
+          </ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+</ion-content>

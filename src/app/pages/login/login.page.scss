@@ -1,0 +1,59 @@
+ion-content {
+  --offset-bottom: 0px !important;
+  position: relative;
+
+  .header {
+    margin-top: 2rem;
+    ion-row {
+      height: 6rem;
+
+      ion-col {
+        ion-title {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  form {
+    width: 90%;
+    height: 70%;
+    margin: 5%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--ion-color-primary-contrast);
+    color: var(--ion-color-primary);
+    padding: 30px;
+    border-radius: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+    ion-grid {
+      ion-row {
+        height: 3rem;
+        margin-bottom: 1rem;
+        ion-title {
+          text-align: center;
+        }
+
+        ion-col {
+          .divider {
+            margin-top: 2rem;
+          }
+        }
+        .social-btn {
+          display: flex;
+          justify-content: center;
+        }
+
+        .button-col {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
