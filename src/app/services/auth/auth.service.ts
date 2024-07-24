@@ -8,7 +8,7 @@ import { User } from './interface';
 })
 export class AuthService {
 
-  private user!: User| null;
+  private user!: User | null;
   error: any;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser: Observable<User | null> = this.currentUserSubject.asObservable();
@@ -42,11 +42,18 @@ export class AuthService {
         });
       } else {
         this.currentUserSubject.next(null);
+        throw {
+          error: true,
+          errorMessage: this.error.message
+        };
       }
       return this.user;
     } catch (error) {
       this.error = error;
-      return this.error.message;
+      return {
+        error: true,
+        errorMessage: this.error.message
+      };
 
     }
   }
@@ -54,26 +61,29 @@ export class AuthService {
   async googleSignin() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      const credential = await this.auth.signInWithPopup(provider);
+      const credential = await this.auth.signInWithRedirect(provider);
+      // this.user = credential;
 
-      this.user = credential.user;
+      return false;
+      // if (!credential.user) {
+      //   this.currentUserSubject.next(null);
+      //   return false;
+      // }
+      // let user = credential.user;
+      // this.currentUserSubject.next({
+      //   uid: user.uid,
+      //   email: user.email,
+      //   displayName: user.displayName,
+      //   photoURL: user.photoURL
+      // });
 
-      if (credential.user) {
-        let user = credential.user;
-        this.currentUserSubject.next({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL
-        });
-      } else {
-        this.currentUserSubject.next(null);
-      }
+      return true;
 
 
 
     } catch (error) {
       this.error = error;
+      return false;
     }
   }
 

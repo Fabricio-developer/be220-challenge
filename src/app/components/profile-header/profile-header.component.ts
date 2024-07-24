@@ -17,6 +17,7 @@ export class ProfileHeaderComponent implements OnInit {
     this.authService.currentUser.subscribe((user) => {
       if (user)
         this.userData = user;
+        console.log("🚀 ~ ProfileHeaderComponent ~ this.authService.currentUser.subscribe ~ this.userData:", this.userData)
 
     })
   }

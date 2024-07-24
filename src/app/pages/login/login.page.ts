@@ -14,13 +14,14 @@ import {
   IonButton,
   IonIcon, IonLabel, IonRow, IonCol, IonGrid, IonTitle, IonInputPasswordToggle
 } from '@ionic/angular/standalone';
-import { LogoComponent } from "../../../../android/app/build/intermediates/assets/debug/public/assets/logo/logo.component";
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { types } from './interface';
 import { ToastController } from '@ionic/angular';
+import { LogoComponent } from 'src/assets/logo/logo.component';
+import { User } from 'src/app/services/auth/interface';
 
 @Component({
   selector: 'app-login',
@@ -64,19 +65,31 @@ export class loginPage {
   }
 
   async onSubmit() {
+    console.log("🚀 ~ loginPage ~ onSubmit ~ onSubmit:")
+   
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value).catch(async (error) => {
-      console.log("🚀 ~ loginPage ~ onSubmit ~ error:", error)
+
+    const auth = await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value).catch(async (error) => {
       const toast = await this.toastController.create({
         message: 'Verfique o login e tente novamente',
         duration: 1000,
         position: 'top',
       });
       await toast.present();
-    }).then(async (credential) => {
+      return;
+    }).then(async (credential: User | any) => {
+      if (credential && credential.error == true) {
+        const toast = await this.toastController.create({
+          message: 'Verfique o login e tente novamente',
+          duration: 1000,
+          position: 'top',
+        });
+        await toast.present();
+        return
+      }
 
       const toast = await this.toastController.create({
         message: 'Logado com sucesso!',
@@ -95,8 +108,16 @@ export class loginPage {
 
     switch (option) {
       case 'google':
-        await this.auth.googleSignin()
-
+        const google: boolean = await this.auth.googleSignin()
+        if (!google) {
+          const toast = await this.toastController.create({
+            message: 'Logado com sucesso!',
+            duration: 1000,
+            position: 'top',
+          });
+          await toast.present();
+          return;
+        }
         this.router.navigate(['/', 'home']);
 
         break;

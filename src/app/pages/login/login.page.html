@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <ion-row class="header"  class="ion-justify-content-center">
+  <ion-row  class="header ion-justify-content-center">
     <ion-col size="2">
       <app-logo [proportion]="'50'" />
     </ion-col>
@@ -12,6 +12,11 @@
 
   <form class="form" [formGroup]="form">
     <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center" >
+          <ion-label>Login</ion-label>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col class="input-col" size="12">
           <ion-input  fill="outline" type="email" formControlName="email"
@@ -36,22 +41,22 @@
             Entrar</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-center">
+      <!-- <ion-row class="ion-justify-content-center">
         <ion-col>
           <div class="divider"></div>
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
-        <ion-col size="6">
+        <ion-col size="6" class="ion-text-center" >
           <ion-label>Ou entre com</ion-label>
           <ion-col class="button-col" size="12">
-            <ion-button mode="ios">
+            <ion-button mode="ios" (click)="login('google')" >
               <ion-icon size="large" name="logo-google"></ion-icon>
               Google
             </ion-button>
           </ion-col>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
 
   </form>

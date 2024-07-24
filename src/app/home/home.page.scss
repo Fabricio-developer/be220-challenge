@@ -1,3 +1,10 @@
+.menu_main {
+  ion-content {
+    --background: var(--ion-color-primary);    
+  }
+}
+
+
 .page-header {
   ion-toolbar {
     min-height: 5rem;
