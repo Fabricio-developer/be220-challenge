@@ -4,17 +4,12 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { environment } from './environments/environment';
-import { enableProdMode } from '@angular/core';
 import { provideFirebaseApp } from '@angular/fire/app';
-import { initializeApp } from 'firebase/app';
-import { FirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule, FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { initializeApp } from 'firebase/app';
+import { environment } from './environments/environment.prod';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
-if (environment.production) {
-  enableProdMode();
-}
+import { FirestoreModule } from '@angular/fire/firestore';
 
 
 bootstrapApplication(AppComponent, {
@@ -27,5 +22,6 @@ bootstrapApplication(AppComponent, {
     AngularFireModule,
     AngularFireAuthModule,
     FirestoreModule
+
   ],
 });

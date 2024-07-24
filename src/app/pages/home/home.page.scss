@@ -1,0 +1,47 @@
+.menu_main {
+  ion-content {
+    --background: var(--ion-color-primary);    
+  }
+}
+
+
+.page-header {
+  ion-toolbar {
+    min-height: 5rem;
+    height: auto;
+    max-height: 15rem;
+    border-radius: 0 0 2rem 2rem;
+
+    // Menu
+    ion-item {
+      ion-buttons {
+        ion-menu-button {
+          --background: transparent;
+          --color: var(--ion-color-primary-contrast);
+        }
+      }
+
+      ion-badge {
+        border-radius: 1rem;
+        height: 1.5rem;
+        width: 1.5rem;
+        display: flex;
+        justify-content: center;
+
+        ion-icon {
+          height: 1rem;
+        }
+      }
+    }
+
+    ion-title {
+      min-height: 2rem;
+      display: flex;
+      justify-content: center;
+      app-logo {
+        object-fit: contain;
+      }
+    }
+
+  }
+}

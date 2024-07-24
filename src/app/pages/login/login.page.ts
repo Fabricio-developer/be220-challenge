@@ -22,6 +22,8 @@ import { types } from './interface';
 import { ToastController } from '@ionic/angular';
 import { LogoComponent } from 'src/assets/logo/logo.component';
 import { User } from 'src/app/services/auth/interface';
+import { Toast } from '@capacitor/toast';
+
 
 @Component({
   selector: 'app-login',
@@ -45,7 +47,7 @@ export class loginPage {
   form!: FormGroup;
   isPwd = false;
 
-  constructor(private router: Router, public auth: AuthService, private toastController: ToastController) {
+  constructor(private router: Router, public auth: AuthService) {
     this.initForm();
     addIcons({ logoGoogle })
   }
@@ -65,40 +67,37 @@ export class loginPage {
   }
 
   async onSubmit() {
-    console.log("🚀 ~ loginPage ~ onSubmit ~ onSubmit:")
-   
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const auth = await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value).catch(async (error) => {
-      const toast = await this.toastController.create({
-        message: 'Verfique o login e tente novamente',
-        duration: 1000,
+    await this.auth.emailSignin(this.form.get('email')?.value, this.form.get('password')?.value).catch(async (error) => {
+      await Toast.show({
+        text: 'Verfique o login e tente novamente',
         position: 'top',
+        duration: 'short'
       });
-      await toast.present();
       return;
     }).then(async (credential: User | any) => {
       if (credential && credential.error == true) {
-        const toast = await this.toastController.create({
-          message: 'Verfique o login e tente novamente',
-          duration: 1000,
+        await Toast.show({
+          text: 'Erro ao efetuar o login',
           position: 'top',
+          duration: 'short'
         });
-        await toast.present();
+
         return
       }
 
-      const toast = await this.toastController.create({
-        message: 'Logado com sucesso!',
-        duration: 1000,
+      await Toast.show({
+        text: 'Logado com sucesso',
         position: 'top',
+        duration: 'short'
       });
 
       localStorage.setItem('user', JSON.stringify(credential))
-      await toast.present();
       this.router.navigate(['/', 'home']);
     })
 
@@ -110,12 +109,10 @@ export class loginPage {
       case 'google':
         const google: boolean = await this.auth.googleSignin()
         if (!google) {
-          const toast = await this.toastController.create({
-            message: 'Logado com sucesso!',
-            duration: 1000,
-            position: 'top',
+          await Toast.show({
+            text: 'Hello!',
           });
-          await toast.present();
+
           return;
         }
         this.router.navigate(['/', 'home']);
