@@ -1,8 +1,8 @@
 {
-  "name": "sidemenu",
+  "name": "rede-usina",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Fabrício Santos",
+  "homepage": "https://eufabriciosantos.com.br",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
